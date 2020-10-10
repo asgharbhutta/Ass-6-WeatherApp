@@ -7,37 +7,43 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,400i,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="./assets/css/style.css" />
-  <title>Git it Done</title>
+  <title>Weather Dashboard</title>
 </head>
 
 <body class="flex-column min-100-vh">
   <header class="hero">
-    <h1 class="app-title"><i class="fab fa-github"></i> Git it Done!</h1>
-    <p>Search for a GitHub user or click on a language to see a list of repositories and how many open issues they have!
+    <h1 class="app-title"><i class="fab"></i>Wether Dashboard</h1>
+    <p>Search for weather data pertaining to the city you want to search
     </p>
   </header>
   <main class="flex-row justify-space-between">
     <div class="col-12 col-md-4">
       <div class="card">
-        <h3 class="card-header text-uppercase">Search By User</h3>
-        <form id="user-form" class="card-body">
-          <label class="form-label" for="username">Username</label>
-          <input name="username" id="username" type="text" autofocus="true" class="form-input"/>
-          <button type="submit" class="btn">Get User</button>
+        <h3 class="card-header text-uppercase">Search By City Name</h3>
+        <form id="input-form" class="card-body">
+          <label class="form-label" for="city">City</label>
+          <input name="city" id="city" type="text" autofocus="true" class="form-input"/>
+          <button type="submit" class="btn">Get Weather</button>
         </form>
       </div>
 
     </div>
     <div class="col-12 col-md-8">
-      <h2 class="subtitle">Showing Repos for: <span id="repo-search-term"></span></h2>
-      <div id="repos-container" class="list-group"></div>
+      <h2 class="subtitle">Showing City: <span id="city-search-term"></span></h2>
+      <div id="city-container" class="list-group"></div>
+        <h2 class="subtite">5-Day Forcast:</h2>
+        <div id="forcast-container"class="list-group">
+
+        </div>
     </div>
 
   </main>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>  
-<script src="assets/js/homepage.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="./assets/js/script.js"></script>
 
 </body>
 
