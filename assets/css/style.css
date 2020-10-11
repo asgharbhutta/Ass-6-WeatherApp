@@ -119,11 +119,12 @@
   .list-group {
     padding: 0;
     list-style: none;
+    width: 50%
   }
   
   .list-item {
     margin-bottom: 10px;
-    padding: 1.5%;
+    padding: 15px;
     border-radius: var(--border-radius);
     background-color: var(--light-dark);
     color: var(--primary);
@@ -176,13 +177,18 @@
   .forcast-card-data{
     line-height: 3;
     padding: 0px 5px 5px 5px;
-    
   }
 
   span .fas {
     width: 100px;
     height: 100px;
   }
+
+  .city-search-term {
+      font-size: 40px;
+      color: green;
+  }
+
   
   /* FORM */
   .form-label,

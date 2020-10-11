@@ -34,6 +34,7 @@ var formSubmitHandler = function(event){
         getWeatherData(cityInputFormEl);
         getForcastData(cityInputFormEl);
         saveLocalStorage(cityInputFormEl);
+        
         var cityInput = document.querySelector("#city");
         cityInput.value = "";
    
@@ -81,11 +82,11 @@ var displayWeatherData = function(data, cityname){
                 .then(function(uvData){
                     var uvIndex = uvData.value;
                     if(uvIndex > 7){
-                        uvEl.classList = "alert alert-danger";
+                        uvEl.classList = "alert btn-danger";
                     }else if(uvIndex > 4 && uvIndex < 7){
-                        uvEl.classList = "alert alert-warning";
+                        uvEl.classList = "alert btn-warning";
                     }else{
-                        uvEl.classList = "alert alert-success";
+                        uvEl.classList = "alert btn-success";
                     }
             
                     uvEl.textContent = "UV Index: " + uvIndex;
@@ -195,6 +196,7 @@ var saveLocalStorage = function(city){
     }
 }
 
+//store the clicked button
 var historyClick = function(){
     var clickedHistoryEl = $(this).text();
     var cityInput = document.querySelector("#city");
@@ -202,22 +204,27 @@ var historyClick = function(){
     formSubmitHandler(event);
 }
 
-
+//get local storage items
 var getAllItems = function()  
 {
     var storedCities = JSON.parse(localStorage.getItem("city"));
-    //for (x in storedCities)
-    for(var i = 0; i <= 5;i++)    
-    {     
-        var innerContainerEl = document.createElement("div");
-        var buttonEl = document.createElement("button");
-        buttonEl.textContent = storedCities[i];
-        innerContainerEl.appendChild(buttonEl);
-        historyContainerEl.appendChild(innerContainerEl);  
-        buttonEl.addEventListener("click", historyClick);
-    } 
+   if(storedCities){
+    for(var i = 0; i <= storedCities.length-1 ;i++)    
+        {     
+            var innerContainerEl = document.createElement("div");
+            var buttonEl = document.createElement("button");
+            buttonEl.classList = "btn";
+            buttonEl.textContent = storedCities[i];
+            innerContainerEl.appendChild(buttonEl);
+            historyContainerEl.appendChild(innerContainerEl);  
+            buttonEl.addEventListener("click", historyClick);
+        } 
+   }
+   else{
+       console.log("no items");
+   }
+  
 }  
-
 
 getAllItems();
 cityFormEl.addEventListener("submit", formSubmitHandler);
