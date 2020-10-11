@@ -4,7 +4,7 @@ var cityFormEl = document.querySelector("#input-form");
 //ref to display the data
 weatherContainerEl = document.querySelector("#city-container");
 citySearchEl = document.querySelector("#city-search-term");
-forcastContainerEl = document.querySelector("forcast-container");
+forcastContainerEl = document.querySelector("#forcast-container");
 
 
 var getWeatherData = function(city){
@@ -48,7 +48,7 @@ var displayWeatherData = function(data, cityname){
         return;
     }
         //get temperature
-        var temperature = data.main.temp - 273.15;
+        var temperature = Math.round(data.main.temp - 273.15);
         var temperatureEl = document.createElement("div");
         temperatureEl.classList = "list-item flex-row justify-space-between align-center";
         temperatureEl.textContent = "Temperature: " + temperature + " C";
@@ -78,7 +78,7 @@ var displayWeatherData = function(data, cityname){
                     var uvIndex = data.value;
                     if(uvIndex > 7){
                         uvEl.classList = "alert alert-danger";
-                    }else if(uvIndex > 4 && uvindex < 7){
+                    }else if(uvIndex > 4 && uvIndex < 7){
                         uvEl.classList = "alert alert-warning";
                     }else{
                         uvEl.classList = "alert alert-success";
@@ -106,23 +106,81 @@ var getForcastData = function(cityname){
         if(response.ok){
             response.json()
             .then(function(data){
-             displayForcastData(data, cityname)  
-                console.log(data)
+             displayForcastData(data)  
             });
         }else{
             alert("Error Returned: " + response.statusText);
         }
     })
-}
+};
 
-var displayForcastData = function(data, cityname){
-    for(i = 0; i < 4; i++){
+var displayForcastData = function(data){
+    forcastContainerEl.textContent = ""
+
+    for(i = 0; i < 40; i = 8 + i){
+
+       //get date data from object and split it from the time 
        var dateForcast = data.list[i].dt_txt;
-       console.log(dateForcast);
+       var dateForcastTrim = dateForcast.split(" ");
+       var dateSpan = document.createElement("span");
+       dateSpan.classList = "forcast-card-data";
+       dateSpan.textContent = dateForcastTrim[0];
 
-       //start grabbing data and creating elemts and append to container in this loop
+       //get weather image
+       var weatherDescription = data.list[i].weather[0].description;
+       var imageLink = document.createElement("span");
+       
+        if(weatherDescription == "clear sky"){
+            imageLink.classList = "fas fa-cloud-sun"
+        }else if(weatherDescription == "overcast clouds"){
+            imageLink.classList = "fas fa-cloud"
+        }else if(weatherDescription == "scattered clouds"){
+            imageLink.classList = "fas fa-cloud-moon"
+        }else if(weatherDescription == "light rain"){
+            imageLink.classList = "fas fa-cloud-rain"
+        }else if(weatherDescription == "broken clouds"){
+            imageLink.classList = "fas fa-cloud-meatball"
+        }else if(weatherDescription == "overcast clouds"){
+            imageLink.classList = "fas fa-cloud-moon-rain"
+        }else{
+            imageLink.classList = "fas fa-sun";
+        }
+        $(imageLink).addClass("fa-2x");
+
+       //get temperature
+       var temperature = Math.round(data.list[i].main.temp - 273.15);
+       var temperatureEl = document.createElement("div");
+       //temperatureEl.classList = "forcast-card-data";
+       temperatureEl.textContent = "Temp: " + temperature + " C";
+
+       //get humidity
+       var humidity = data.list[i].main.humidity
+       var humidityEl = document.createElement("div");
+       //humidityEl.classList = "forcast-card-data";
+       humidityEl.textContent = "Humidity: " + humidity + "%";
+
+       //attached container creation
+       var outerCard = document.createElement("div");
+       outerCard.classList = "card bg-primary text-white forcast-card";
+
+       var innerCard = document.createElement("div");
+       innerCard.classList = "card-body forcast-card-data"
+
+       outerCard.appendChild(innerCard);
+
+       //append all data points to innercard
+       innerCard.appendChild(dateSpan);
+       innerCard.appendChild(imageLink);
+       innerCard.appendChild(temperatureEl);
+       innerCard.appendChild(humidityEl);
+
+       //append container
+        forcastContainerEl.appendChild(outerCard);
+
     }
-}
+
+    
+};
 
 
 
