@@ -206,19 +206,16 @@ var historyClick = function(){
 var getAllItems = function()  
 {
     var storedCities = JSON.parse(localStorage.getItem("city"));
-    for (x in storedCities)    
+    //for (x in storedCities)
+    for(var i = 0; i <= 5;i++)    
     {     
-        //var key = localStorage.key(x);    
-        //var val = localStorage.getItem(key);
         var innerContainerEl = document.createElement("div");
         var buttonEl = document.createElement("button");
-        buttonEl.textContent = storedCities[x];
+        buttonEl.textContent = storedCities[i];
         innerContainerEl.appendChild(buttonEl);
         historyContainerEl.appendChild(innerContainerEl);  
         buttonEl.addEventListener("click", historyClick);
-    }
-    
-      
+    } 
 }  
 
 
