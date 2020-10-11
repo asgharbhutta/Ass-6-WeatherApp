@@ -15,7 +15,7 @@
 <body class="flex-column min-100-vh">
   <header class="hero">
     <h1 class="app-title"><i class="fab"></i>Weather Dashboard</h1>
-    <p>Search for weather data pertaining to the city you want to search
+    <p>Search for weather data for any city! - When you refresh your browser history will be saved.
     </p>
   </header>
   <main class="flex-row justify-space-between">
@@ -35,7 +35,7 @@
       </div>
     </div>
     <div class="col-12 col-md-9">
-      <h2 class="subtitle">Showing City: <span id="city-search-term" class="city-search-term"></span></h2>
+      <h2 class="subtitle">Current weather for: <span id="city-search-term" class="city-search-term"></span></h2>
       <div id="city-container" class="list-group"></div>
         <h2 class="subtite">5-Day Forcast:</h2>
         <div id="forcast-container" class="flex-row flex-wrap">
@@ -47,6 +47,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 <script src="./assets/js/script.js"></script>
 
 </body>

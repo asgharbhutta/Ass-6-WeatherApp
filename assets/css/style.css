@@ -114,6 +114,7 @@
     display: inline-block;
     border-radius: var(--border-radius);
     box-shadow: 6px 5px var(--light-dark);
+    margin-bottom: 10px;
   }
   
   .list-group {
@@ -185,8 +186,8 @@
   }
 
   .city-search-term {
-      font-size: 40px;
-      color: green;
+      font-size: 34px;
+      color: black;
   }
 
   

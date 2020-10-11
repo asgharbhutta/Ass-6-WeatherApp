@@ -26,7 +26,7 @@ var getWeatherData = function(city){
 };
 
 
-//This executes when the event listener kicks off
+//This executes when the event listener kicks off to handle the button click
 var formSubmitHandler = function(event){
     event.preventDefault();
     var cityInputFormEl = document.querySelector("#city").value.trim();
@@ -45,7 +45,7 @@ var formSubmitHandler = function(event){
 
 var displayWeatherData = function(data, cityname){
     weatherContainerEl.textContent = "";
-    citySearchEl.textContent = cityname;
+    citySearchEl.textContent = cityname + ", " + "(" + moment().format('MMMM Do YYYY') + ")";
 
     //check if api returned any repos
     if(data.length === 0){
@@ -208,8 +208,9 @@ var historyClick = function(){
 var getAllItems = function()  
 {
     var storedCities = JSON.parse(localStorage.getItem("city"));
-   if(storedCities){
-    for(var i = 0; i <= storedCities.length-1 ;i++)    
+    
+    if(storedCities){
+    for(var i = 0; i <= storedCities.length-1 ;i++)
         {     
             var innerContainerEl = document.createElement("div");
             var buttonEl = document.createElement("button");
