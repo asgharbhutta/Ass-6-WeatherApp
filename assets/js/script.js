@@ -69,13 +69,13 @@ var displayWeatherData = function(data, cityname){
         var uvIndexLon = data.coord.lon;
         var uvIndexLat = data.coord.lat;
         var uvEl = document.createElement("div");
-        var uvURL = "http://api.openweathermap.org/data/2.5/uvi?lat=" + uvIndexLat + "&lon=" + uvIndexLon + "&appid=443d53b576fbee38c5cf0db4dbe2ff2b"
+        var uvURL = "https://api.openweathermap.org/data/2.5/uvi?lat=" + uvIndexLat + "&lon=" + uvIndexLon + "&appid=443d53b576fbee38c5cf0db4dbe2ff2b"
         fetch(uvURL)
         .then(function(response){
             if(response.ok){
                 response.json()
-                .then(function(data){
-                    var uvIndex = data.value;
+                .then(function(uvData){
+                    var uvIndex = uvData.value;
                     if(uvIndex > 7){
                         uvEl.classList = "alert alert-danger";
                     }else if(uvIndex > 4 && uvIndex < 7){
@@ -84,7 +84,7 @@ var displayWeatherData = function(data, cityname){
                         uvEl.classList = "alert alert-success";
                     }
             
-                    uvEl.textContent = "UV Index " + uvIndex;
+                    uvEl.textContent = "UV Index: " + uvIndex;
         
                 }) //here
             }else{
