@@ -5,6 +5,7 @@ var cityFormEl = document.querySelector("#input-form");
 weatherContainerEl = document.querySelector("#city-container");
 citySearchEl = document.querySelector("#city-search-term");
 forcastContainerEl = document.querySelector("#forcast-container");
+historyContainerEl = document.querySelector("#history-container");
 
 
 var getWeatherData = function(city){
@@ -32,7 +33,10 @@ var formSubmitHandler = function(event){
     if(cityInputFormEl){
         getWeatherData(cityInputFormEl);
         getForcastData(cityInputFormEl);
-        cityInputFormEl.value = "";
+        saveLocalStorage(cityInputFormEl);
+        var cityInput = document.querySelector("#city");
+        cityInput.value = "";
+   
     }else{
         alert("Enter a correct city name!");
     }
@@ -99,7 +103,7 @@ var displayWeatherData = function(data, cityname){
 }
 
 var getForcastData = function(cityname){
-    var apiForcast = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityname + "&appid=443d53b576fbee38c5cf0db4dbe2ff2b&limit=5"
+    var apiForcast = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityname + "&appid=443d53b576fbee38c5cf0db4dbe2ff2b"
 
     fetch(apiForcast)
     .then(function(response){
@@ -176,17 +180,47 @@ var displayForcastData = function(data){
 
        //append container
         forcastContainerEl.appendChild(outerCard);
-
     }
-
-    
 };
 
+var saveLocalStorage = function(city){
+    var storedCities = JSON.parse(localStorage.getItem("city"));
+    if(storedCities){
+        storedCities.push(city);
+        localStorage.setItem("city", JSON.stringify(storedCities)); 
+    }else{
+        storedCities = []
+        storedCities.push(city);
+        localStorage.setItem("city", JSON.stringify(storedCities));
+    }
+}
+
+var historyClick = function(){
+    var clickedHistoryEl = $(this).text();
+    var cityInput = document.querySelector("#city");
+    cityInput.value = clickedHistoryEl;
+    formSubmitHandler(event);
+}
 
 
+var getAllItems = function()  
+{
+    var storedCities = JSON.parse(localStorage.getItem("city"));
+    for (x in storedCities)    
+    {     
+        //var key = localStorage.key(x);    
+        //var val = localStorage.getItem(key);
+        var innerContainerEl = document.createElement("div");
+        var buttonEl = document.createElement("button");
+        buttonEl.textContent = storedCities[x];
+        innerContainerEl.appendChild(buttonEl);
+        historyContainerEl.appendChild(innerContainerEl);  
+        buttonEl.addEventListener("click", historyClick);
+    }
+    
+      
+}  
 
 
-
-
-
+getAllItems();
 cityFormEl.addEventListener("submit", formSubmitHandler);
