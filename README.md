@@ -2,7 +2,7 @@
 
 # Purpose of project
 
-to showcase what we learned about third party api calls
+To showcase what we learned about third party api calls
 
 # How does it work?
 
