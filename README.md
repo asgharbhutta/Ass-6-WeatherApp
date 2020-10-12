@@ -10,4 +10,4 @@ You type in the name of a city or country that you want to know the current weat
 On the left hand side you are presented with a search history after you refresh the browser.
 
 # Screenshot
-<img src="https://github.com/asgharbhutta/Ass-5-Scheduler/blob/master/Ass-5-Scheduler.png">
+<img src="https://github.com/asgharbhutta/Ass-6-WeatherApp/blob/master/appImage.png">
